@@ -1,0 +1,66 @@
+result for nfa1.txt
+
+---------------------------------------
+step 1 : read (ε)-NFA from text file
+
+(ε)-NFA : 
+StateSet = { q000, q001, q002, q003, q004 }
+TerminalSet = { 0, 1 }
+DeltaFunctions = {
+(q000, 0) = {q001, q002}
+(q000, 1) = {q001, q003}
+(q001, 0) = {q001, q002}
+(q001, 1) = {q001, q003}
+(q002, 0) = {q004}
+(q003, 1) = {q004}
+(q004, 0) = {q004}
+(q004, 1) = {q004}
+}
+StartState = q000
+FinalStateSet = { q004 }
+
+---------------------------------------
+step 2 : convert NFA to DFA
+
+state substitution information : 
+[q000]->q000, [q001, q002]->q001, [q001, q003]->q002, [q001, q002, q004]->q003, [q001, q003, q004]->q004
+
+DFA : 
+StateSet = { q000, q001, q002, q003, q004 }
+TerminalSet = { 0, 1 }
+DeltaFunctions = {
+(q000, 0) = {q001}
+(q000, 1) = {q002}
+(q001, 0) = {q003}
+(q001, 1) = {q002}
+(q002, 0) = {q001}
+(q002, 1) = {q004}
+(q003, 0) = {q003}
+(q003, 1) = {q004}
+(q004, 0) = {q003}
+(q004, 1) = {q004}
+}
+StartState = q000
+FinalStateSet = { q003, q004 }
+
+---------------------------------------
+step 3 : minimize DFA to reduced DFA
+
+state substitution information : 
+[q003, q004]->q000, [q000]->q001, [q001]->q002, [q002]->q003
+
+reduced DFA : 
+StateSet = { q000, q001, q002, q003 }
+TerminalSet = { 0, 1 }
+DeltaFunctions = {
+(q000, 0) = {q000}
+(q000, 1) = {q000}
+(q001, 0) = {q002}
+(q001, 1) = {q003}
+(q002, 0) = {q000}
+(q002, 1) = {q003}
+(q003, 0) = {q002}
+(q003, 1) = {q000}
+}
+StartState = q001
+FinalStateSet = { q000 }
